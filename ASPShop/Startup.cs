@@ -12,28 +12,32 @@ namespace ASPShop
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        IWebHostEnvironment _env;
+        public Startup(IWebHostEnvironment env)
+        {
+            _env = env;
+        }
+        // Метод для реєстрації сервісів
         public void ConfigureServices(IServiceCollection services)
         {
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // Обов'язковий методЮ, який встановлює, як буде оброблятися запрос
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            app.UseStaticFiles();
+            int x = 5;
+            int y = 8;
+            int z = 0;
+            app.Use(async (context, next) =>
             {
-                app.UseDeveloperExceptionPage();
-            }
+                z = x * y;
+                await next.Invoke();
+            });
 
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
+            app.Run(async (context) =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                await context.Response.WriteAsync($"x * y = {z}");
             });
         }
     }

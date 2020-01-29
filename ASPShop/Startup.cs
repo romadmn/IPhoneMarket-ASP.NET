@@ -24,11 +24,16 @@ namespace ASPShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IMessageSender, EmailMessageSender>();
+            services.AddTransient<MessageSender>();
+            // Добавлення сервісів сесії
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
-        // Обов'язковий методЮ, який встановлює, як буде оброблятися запрос
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMessageSender messageSender)
+        // Обов'язковий метод, який встановлює, як буде оброблятися запрос
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MessageSender messageSender)
         {
+            app.UseSession(); // Добавлення механізму роботи з сесіями
             app.UseFileServer();
             // обробка помилок HTTP
             //app.UseStatusCodePagesWithReExecute("/error", "?code={0}");
@@ -39,7 +44,13 @@ namespace ASPShop
             //}));
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync(messageSender.Send("Hello world!"));
+                if (context.Session.Keys.Contains("name"))
+                    await context.Response.WriteAsync($"Hello {context.Session.GetString("name")}!");
+                else
+                {
+                    context.Session.SetString("name", "Roman");
+                    await context.Response.WriteAsync("Hello World!");
+                }
             });
         }
     }

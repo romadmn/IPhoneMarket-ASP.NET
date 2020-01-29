@@ -27,7 +27,12 @@ namespace ASPShop
             services.AddTransient<MessageSender>();
             // Добавлення сервісів сесії
             services.AddDistributedMemoryCache();
-            services.AddSession();
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".RomanFerentsApp.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(3600);
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // Обов'язковий метод, який встановлює, як буде оброблятися запрос

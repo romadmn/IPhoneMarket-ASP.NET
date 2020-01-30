@@ -4,7 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
-using ASPShop.Models;
+using ASPShop.Data.interfaces;
+using ASPShop.Data.mocks;
+using ASPShop.Data.Models;
 using ASPShop.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,10 +33,12 @@ namespace ASPShop
         public void ConfigureServices(IServiceCollection services)
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<MobileContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<MarketContext>(options => options.UseSqlServer(connection));
             services.AddMvc();
             services.AddTransient<IMessageSender, EmailMessageSender>();
             services.AddTransient<MessageSender>();
+            services.AddTransient<IAllProducts, MockProducts>(); // Обєднує клас і інтерфейс між собою
+            services.AddTransient<IProductsCategory, MockCategory>(); // Обєднує клас і інтерфейс між собою
             // Добавлення сервісів сесії
             services.AddDistributedMemoryCache();
             services.AddSession(options =>

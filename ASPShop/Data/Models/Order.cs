@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ASPShop.Models
+namespace ASPShop.Data.Models
 {
     public class Order
     {

@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ASPShop.Models;
+using ASPShop.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASPShop.Controllers
 {
     public class HomeController : Controller
     {
-        MobileContext db;
-        public HomeController(MobileContext context)
+        MarketContext db;
+        public HomeController(MarketContext context)
         {
             db = context;
         }

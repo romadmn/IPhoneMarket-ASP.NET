@@ -4,11 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
+using ASPShop.Models;
 using ASPShop.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
@@ -18,13 +21,17 @@ namespace ASPShop
     public class Startup
     {
         IWebHostEnvironment _env;
-        public Startup(IWebHostEnvironment env)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             _env = env;
+            Configuration = configuration;
         }
+        public IConfiguration Configuration { get; }
         // Метод для реєстрації сервісів
         public void ConfigureServices(IServiceCollection services)
         {
+            string connection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<MobileContext>(options => options.UseSqlServer(connection));
             services.AddMvc();
             services.AddTransient<IMessageSender, EmailMessageSender>();
             services.AddTransient<MessageSender>();

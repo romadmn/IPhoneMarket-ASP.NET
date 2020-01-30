@@ -9,6 +9,7 @@ namespace ASPShop.Data.Models
     public class MarketContext : DbContext
     {
         public DbSet<Phone> Phones { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
 
         public MarketContext(DbContextOptions<MarketContext> options)

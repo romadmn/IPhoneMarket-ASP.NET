@@ -32,13 +32,13 @@ namespace ASPShop
         // Метод для реєстрації сервісів
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IAllProducts, MockProducts>(); // Обєднує клас і інтерфейс між собою
+            services.AddTransient<IProductsCategory, MockCategory>(); // Обєднує клас і інтерфейс між собою
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<MarketContext>(options => options.UseSqlServer(connection));
             services.AddMvc();
             services.AddTransient<IMessageSender, EmailMessageSender>();
             services.AddTransient<MessageSender>();
-            services.AddTransient<IAllProducts, MockProducts>(); // Обєднує клас і інтерфейс між собою
-            services.AddTransient<IProductsCategory, MockCategory>(); // Обєднує клас і інтерфейс між собою
             // Добавлення сервісів сесії
             services.AddDistributedMemoryCache();
             services.AddSession(options =>

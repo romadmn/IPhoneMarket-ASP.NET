@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using ASPShop.Data.interfaces;
 using ASPShop.Data.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASPShop.Controllers
@@ -10,13 +13,15 @@ namespace ASPShop.Controllers
     public class HomeController : Controller
     {
         MarketContext db;
-        public HomeController(MarketContext context)
+        private readonly IWebHostEnvironment _appEnvironment;
+        public HomeController(MarketContext context, IWebHostEnvironment appEnvironment)
         {
             db = context;
+            _appEnvironment = appEnvironment;
         }
-        public IActionResult Index()
+        public IActionResult Index([FromServices] IAllProducts products)
         {
-            return View(db.Phones.ToList());
+            return View(products.Products);
         }
         [HttpGet]
         public IActionResult Buy(int? id)
@@ -30,7 +35,16 @@ namespace ASPShop.Controllers
         {
             db.Orders.Add(order);
             db.SaveChanges();
-            return "Дякую, " + order.User + ", за покупку!";
+            return "Дякую, " + order.User + ", за замовлення. З вами скоро зв'яжуться!";
+        }
+        public IActionResult GetCv()
+        {
+            // Шлях до файлу
+            string file_path = Path.Combine(_appEnvironment.WebRootPath, "Files/FerentsCV.doc");
+            // Тип файла - content-type
+            string file_type = "application/doc";
+            string file_name = "FerentsCV.doc";
+            return PhysicalFile(file_path, file_type, file_name);
         }
     }
 }

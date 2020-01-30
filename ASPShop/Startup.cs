@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using ASPShop.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
@@ -23,6 +25,7 @@ namespace ASPShop
         // Метод для реєстрації сервісів
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
             services.AddTransient<IMessageSender, EmailMessageSender>();
             services.AddTransient<MessageSender>();
             // Добавлення сервісів сесії
@@ -39,7 +42,7 @@ namespace ASPShop
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MessageSender messageSender)
         {
             app.UseSession(); // Добавлення механізму роботи з сесіями
-            app.UseFileServer();
+            app.UseStaticFiles();
             // обробка помилок HTTP
             //app.UseStatusCodePagesWithReExecute("/error", "?code={0}");
 
@@ -47,16 +50,14 @@ namespace ASPShop
             //{
             //    await context.Response.WriteAsync($"Err: {context.Request.Query["code"]}");
             //}));
-            app.Run(async (context) =>
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                if (context.Session.Keys.Contains("name"))
-                    await context.Response.WriteAsync($"Hello {context.Session.GetString("name")}!");
-                else
-                {
-                    context.Session.SetString("name", "Roman");
-                    await context.Response.WriteAsync("Hello World!");
-                }
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
     }
 }

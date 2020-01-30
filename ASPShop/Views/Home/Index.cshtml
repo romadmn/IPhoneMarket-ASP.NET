@@ -1,14 +1,31 @@
-﻿@{
+﻿@model IEnumerable<ASPShop.Models.Phone>
+@{
     Layout = null;
 }
-<!doctype html>
+<!DOCTYPE html>
+
 <html>
 <head>
-    <title>Hello ASP.NET MVC Core</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width">
+    <title>Магазин телефонів</title>
 </head>
 <body>
-<h2>Hello World!</h2>
+<h3>Смартфони</h3>
+<table>
+    <tr>
+        <td>Модель</td>
+        <td>Виробник</td>
+        <td>Ціна</td>
+        <td></td>
+    </tr>
+    @foreach (var phone in Model)
+    {
+        <tr>
+            <td>@phone.Name</td>
+            <td>@phone.Company</td>
+            <td>@phone.Price</td>
+            <td><a href="~/Home/Buy/@phone.Id">Купити</a></td>
+        </tr>
+    }
+</table>
 </body>
 </html>

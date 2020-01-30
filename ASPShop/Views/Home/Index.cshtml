@@ -1,16 +1,8 @@
-﻿@model IEnumerable<ASPShop.Models.Phone>
-@{
-    Layout = null;
+﻿@{
+    ViewData["Title"] = "Каталог товарів";
 }
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>Магазин телефонів</title>
-</head>
-<body>
 <h3>Смартфони</h3>
-<table>
+<table class="table-condensed">
     <tr>
         <td>Модель</td>
         <td>Виробник</td>
@@ -27,5 +19,3 @@
         </tr>
     }
 </table>
-</body>
-</html>

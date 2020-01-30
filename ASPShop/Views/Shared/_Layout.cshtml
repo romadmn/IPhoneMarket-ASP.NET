@@ -8,22 +8,38 @@
 </head>
 <body>
 <!--меню-->
-<nav class="navbar navbar-inverse">
-    <div class="container">
-        <div>
-            <ul class="nav navbar-nav">
-                <li><a href="~/Home/Index" class="navbar-brand">Главная</a></li>
-            </ul>
-        </div>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mt-60">
+    <a class="navbar-brand" href="#">RedApple Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="~/Home/Index">Головна <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="~/Home/GetCv">Скачати резюме</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn btn-danger" href="http://romanferents.me/" >Мій сайт резюме</a>
+            </li>
+        </ul>
+        <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Пошук">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Пошук</button>
+        </form>
     </div>
 </nav>
 <!--Main content-->
-<div class="container body-content">
+<div class="container body-content" style="margin-top: 70px">
     @RenderBody()
     <hr />
-    <footer>
-        <p>© 2019 - RedApple Store</p>
-    </footer>
 </div>
+<footer class="footer mt-auto py-3">
+    <div class="container">
+        <span class="text-muted">RedApple - магазин техніки Apple!</span>
+    </div>
+</footer>
 </body>
 </html>

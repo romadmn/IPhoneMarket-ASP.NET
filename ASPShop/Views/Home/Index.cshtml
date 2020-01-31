@@ -1,23 +1,26 @@
 ﻿@{
     ViewData["Title"] = "Каталог товарів";
 }
-<h3 class="products">Продукція</h3>
-<div class="container mt-6">
+<h3>Продукція</h3>
+<div class="container">
     <div class="row">
         @foreach (var phone in Model)
         {
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                    <img src="@phone.Img">
-                    <div class="card-body">
-                        <p class="card-text">@phone.Name</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a class="btn btn-primary" href="~/Home/Buy/@phone.Id">Купити</a>
-                            <small><b>Ціна: </b>@phone.Price</small>
+                    <div class="boximg">
+                        <img src="~/@phone.Img">
+                    </div>
+                        <div class="card-body">
+                            <p class="card-text"><b>@phone.Name</b></p>
+                            <p class="card-text">@phone.LongDesk</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a class="btn btn-outline-primary" href="~/Home/Buy/@phone.Id">Купити</a>
+                                <small><b>Ціна: </b>@phone.Price</small>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         }
     </div>
 </div>

@@ -52,6 +52,10 @@ namespace ASPShop
         // Обов'язковий метод, який встановлює, як буде оброблятися запрос
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MessageSender messageSender)
         {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
             app.UseSession(); // Добавлення механізму роботи з сесіями
             app.UseStaticFiles();
             // обробка помилок HTTP

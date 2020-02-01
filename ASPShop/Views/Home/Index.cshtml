@@ -1,22 +1,23 @@
-﻿@{
+﻿@model FavoriteProductsViewModel
+@{
     ViewData["Title"] = "Каталог товарів";
 }
-<h3>Продукція</h3>
+<h3>Найкращі товари</h3>
 <div class="container">
     <div class="row">
-        @foreach (var phone in Model)
+        @foreach (var product in Model.favoriteProducts)
         {
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
                     <div class="boximg">
-                        <img src="~/@phone.Img">
+                        <img src="~/@product.Img">
                     </div>
                         <div class="card-body">
-                            <p class="card-text"><b>@phone.Name</b></p>
-                            <p class="card-text">@phone.LongDesk</p>
+                            <p class="card-text"><b>@product.Name</b></p>
+                            <p class="card-text">@product.LongDesk</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <a class="btn btn-outline-primary" href="~/Home/Buy/@phone.Id">Купити</a>
-                                <small><b>Ціна: </b>@phone.Price.ToString("c")</small>
+                                <a class="btn btn-outline-primary" href="~/Home/Buy/@product.Id">Купити</a>
+                                <small><b>Ціна: </b>@product.Price.ToString("c")</small>
                             </div>
                         </div>
                     </div>

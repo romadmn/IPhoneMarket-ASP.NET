@@ -8,21 +8,62 @@ using ASPShop.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using ASPShop.Data.Models;
+using ASPShop.ViewModels;
 
 namespace ASPShop.Controllers
 {
     public class HomeController : Controller
     {
-        MarketContext db;
+        private readonly IAllProducts _allProducts;
+        private readonly IProductsCategory _allCategories;
         private readonly IWebHostEnvironment _appEnvironment;
-        public HomeController(MarketContext context, IWebHostEnvironment appEnvironment)
+        public HomeController(IAllProducts allProducts, IProductsCategory allCategories, IWebHostEnvironment appEnvironment)
         {
-            db = context;
+            _allProducts = allProducts;
+            _allCategories = allCategories;
             _appEnvironment = appEnvironment;
         }
         public IActionResult Index()
         {
-            return View(db.Product.ToList());
+            var favproducts = new FavoriteProductsViewModel { favoriteProducts = _allProducts.getFavProducts};
+            return View(favproducts);
+        }
+        [Route("Home/Products")]
+        [Route("Home/Products/{category}")]
+        public IActionResult Products(string category)
+        {
+            IEnumerable<Product> products = null;
+            string currentCategory = "Всі товари";
+            if (string.IsNullOrEmpty(category))
+            {
+                products = _allProducts.Products.OrderBy(i=>i.Id);
+            }
+            else
+            {
+                if (string.Equals("phone", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    products = _allProducts.Products.Where(i => i.Category.CategoryName.Equals("Телефони")).OrderBy(i=>i.Id);
+                    currentCategory = "Телефони";
+                }
+                else if (string.Equals("headphone", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    products = _allProducts.Products.Where(i => i.Category.CategoryName.Equals("Навушніки")).OrderBy(i => i.Id);
+                    currentCategory = "Навушніки";
+                }
+                else if(string.Equals("watch", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    products = _allProducts.Products.Where(i => i.Category.CategoryName.Equals("Годинники")).OrderBy(i => i.Id);
+                    currentCategory = "Годинники";
+                }
+
+            }
+
+            var productObject = new ProductsListViewModel
+            {
+                AllProducts = products,
+                CurrentCategory = currentCategory
+            };
+            return View(productObject);
         }
         [HttpGet]
         public IActionResult Buy(int? id)
@@ -34,18 +75,14 @@ namespace ASPShop.Controllers
         [HttpPost]
         public string Buy(Order order)
         {
-            db.Order.Add(order);
-            db.SaveChanges();
+            //db.Order.Add(order);
+            //db.SaveChanges();
             return "Дякую, " + order.User + ", за замовлення. З вами скоро зв'яжуться!";
         }
-        public IActionResult GetCv()
+        public VirtualFileResult GetCv()
         {
-            // Шлях до файлу
-            string file_path = Path.Combine(_appEnvironment.WebRootPath, "Files/FerentsCV.doc");
-            // Тип файла - content-type
-            string file_type = "application/doc";
-            string file_name = "FerentsCV.doc";
-            return PhysicalFile(file_path, file_type, file_name);
+            var filepath = Path.Combine("~/Files", "FerentsCV.doc");
+            return File(filepath, "application/octet-stream", "FerentsCV.doc");
         }
     }
 }

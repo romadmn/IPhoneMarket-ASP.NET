@@ -8,42 +8,50 @@
     <link rel="stylesheet" type="text/css" href="~/css/style.css"/>
 </head>
 <body>
-<!--меню-->
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mt-60">
-    <a class="navbar-brand" href="/">RedApple Store</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Головна</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/ShopCart/">Корзина</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/Home/GetCv">Скачати резюме</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link btn btn-danger" href="http://romadmn.github.io/">Мій сайт резюме</a>
-            </li>
-        </ul>
-        <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Пошук">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Пошук</button>
-        </form>
+    <!--меню-->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mt-60">
+        <a class="navbar-brand" href="/">RedApple Store</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Головна</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Home/Products/">Всі товари</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/Home/Products/" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Вибрати категорію товарів</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="/Home/Products/Phone/">Телефони</a>
+                        <a class="dropdown-item" href="/Home/Products/HeadPhone/">Навушніки</a>
+                        <a class="dropdown-item" href="/Home/Products/Watch/">Годинники</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-success" href="/Home/GetCv/" asp-controller="Home" asp-action="GetCv">Скачати резюме</a>
+                </li>
+            </ul>
+            <div class="form-inline mt-2 mt-md-0">
+                <a class="nav-link btn btn-danger" href="/ShopCart/">Корзина</a>
+            </div>
+        </div>
+    </nav>
+    <!--Main content-->
+    <div class="shop container body-content">
+        @RenderBody()
+        <hr />
     </div>
-</nav>
-<!--Main content-->
-<div class="shop container body-content">
-    @RenderBody()
-    <hr />
-</div>
-<footer class="footer mt-auto py-3">
-    <div class="container">
-        <span class="text-muted">RedApple - магазин техніки Apple!</span>
-    </div>
-</footer>
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <span class="text-muted">RedApple - магазин техніки Apple!</span>
+        </div>
+    </footer>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="https://bootstrap-4.ru/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="https://bootstrap-4.ru/assets/js/vendor/popper.min.js"></script>
+<script src="https://bootstrap-4.ru/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -39,7 +39,10 @@ namespace ASPShop
             services.AddDbContext<MarketContext>(options => options.UseSqlServer(connection));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sp => ShopCart.GetCart(sp));
-            services.AddMvc();
+            services.AddMvc(mvcOtions =>
+            {
+                mvcOtions.EnableEndpointRouting = false;
+            });
             //services.AddTransient<IMessageSender, EmailMessageSender>();
             //services.AddTransient<MessageSender>();
             // Добавлення сервісів сесії
@@ -57,11 +60,14 @@ namespace ASPShop
             app.UseSession(); // Добавлення механізму роботи з сесіями
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseEndpoints(endpoints =>
+            app.UseMvc(routes =>
             {
-                endpoints.MapControllerRoute(
+                routes.MapRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "categoryFilter",
+                    template: "Home/{action}/{category?}", defaults: new { controller = "Home", action = "Products"});
             });
         }
 

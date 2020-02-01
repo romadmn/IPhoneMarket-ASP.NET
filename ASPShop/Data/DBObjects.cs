@@ -22,7 +22,7 @@ namespace ASPShop.Data
             if (!context.Product.Any())
             {
                 context.Product.AddRange(
-                    new Phone
+                    new Product
                     {
                         Name = "iPhone 11",
                         ShortDesk = "Новый Айфон - cтильний, ультра функціональний",
@@ -34,7 +34,7 @@ namespace ASPShop.Data
                         Category = context.Category.FirstOrDefault(p=>p.Id == 1)
 
                     },
-                    new HeadPhone
+                    new Product
                     {
                         Name = "AirPods Pro",
                         ShortDesk = "AirPods Pro – настав час почути ідеальний звук",
@@ -45,7 +45,7 @@ namespace ASPShop.Data
                         Availible = true,
                         Category = context.Category.FirstOrDefault(p => p.Id == 2)
                     },
-                    new Watch
+                    new Product
                     {
                         Name = "Apple Watch Series 5",
                         ShortDesk = "Стильний смарт-годинник",

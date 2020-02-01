@@ -11,11 +11,11 @@ namespace ASPShop.Data.Repository
     {
         private readonly MarketContext _marketContext;
 
-        CategoryRepository(MarketContext marketContext)
+        public CategoryRepository(MarketContext marketContext)
         {
             _marketContext = marketContext;
         }
 
-        public IEnumerable<Category> AllCategories { get; }
+        public IEnumerable<Category> AllCategories => _marketContext.Category;
     }
 }

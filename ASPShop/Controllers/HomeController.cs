@@ -22,7 +22,7 @@ namespace ASPShop.Controllers
         }
         public IActionResult Index()
         {
-            return View(db.Products.ToList());
+            return View(db.Product.ToList());
         }
         [HttpGet]
         public IActionResult Buy(int? id)
@@ -34,7 +34,7 @@ namespace ASPShop.Controllers
         [HttpPost]
         public string Buy(Order order)
         {
-            db.Orders.Add(order);
+            db.Order.Add(order);
             db.SaveChanges();
             return "Дякую, " + order.User + ", за замовлення. З вами скоро зв'яжуться!";
         }

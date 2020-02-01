@@ -10,10 +10,19 @@ namespace ASPShop.Data
     {
         public static void Initialize(MarketContext context)
         {
-            if (!context.Products.Any())
+            if (!context.Category.Any())
             {
-                context.Products.AddRange(
-                    new Product
+                context.Category.AddRange(
+                    new Category { CategoryName = "Телефони", Desc = "IPhones" },
+                    new Category { CategoryName = "Навушніки", Desc = "AirPods Та EarPods" },
+                    new Category { CategoryName = "Годинники", Desc = "AppleWatches всі серії" }
+                );
+                context.SaveChanges();
+            }
+            if (!context.Product.Any())
+            {
+                context.Product.AddRange(
+                    new Phone
                     {
                         Name = "iPhone 11",
                         ShortDesk = "Новый Айфон - cтильний, ультра функціональний",
@@ -22,10 +31,10 @@ namespace ASPShop.Data
                         Price = 22000,
                         IsFavourite = true,
                         Availible = true,
-                        Category = context.Categories.ElementAt(0)
+                        Category = context.Category.FirstOrDefault(p=>p.Id == 1)
 
                     },
-                    new Product
+                    new HeadPhone
                     {
                         Name = "AirPods Pro",
                         ShortDesk = "AirPods Pro – настав час почути ідеальний звук",
@@ -34,9 +43,9 @@ namespace ASPShop.Data
                         Price = 7999,
                         IsFavourite = false,
                         Availible = true,
-                        Category = context.Categories.ElementAt(1)
+                        Category = context.Category.FirstOrDefault(p => p.Id == 2)
                     },
-                    new Product
+                    new Watch
                     {
                         Name = "Apple Watch Series 5",
                         ShortDesk = "Стильний смарт-годинник",
@@ -45,17 +54,8 @@ namespace ASPShop.Data
                         Price = 11000,
                         IsFavourite = false,
                         Availible = true,
-                        Category = context.Categories.ElementAt(2)
+                        Category = context.Category.FirstOrDefault(p => p.Id == 3)
                     }
-                );
-                context.SaveChanges();
-            }
-            if (!context.Categories.Any())
-            {
-                context.Categories.AddRange(
-                    new Category { CategoryName = "Телефони", Desc = "IPhones" },
-                    new Category { CategoryName = "Навушніки", Desc = "AirPods Та EarPods" },
-                    new Category { CategoryName = "Годинники", Desc = "AppleWatches всі серії" }
                 );
                 context.SaveChanges();
             }

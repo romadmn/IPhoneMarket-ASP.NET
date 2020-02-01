@@ -6,6 +6,7 @@ using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using ASPShop.Data.interfaces;
 using ASPShop.Data;
+using ASPShop.Data.Models;
 using ASPShop.Data.Repository;
 using ASPShop.Services;
 using Microsoft.AspNetCore.Builder;
@@ -36,21 +37,18 @@ namespace ASPShop
             services.AddTransient<IProductsCategory, CategoryRepository>(); // Обєднує клас і інтерфейс між собою
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<MarketContext>(options => options.UseSqlServer(connection));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped(sp => ShopCart.GetCart(sp));
             services.AddMvc();
-            services.AddTransient<IMessageSender, EmailMessageSender>();
-            services.AddTransient<MessageSender>();
+            //services.AddTransient<IMessageSender, EmailMessageSender>();
+            //services.AddTransient<MessageSender>();
             // Добавлення сервісів сесії
-            services.AddDistributedMemoryCache();
-            services.AddSession(options =>
-            {
-                options.Cookie.Name = ".RomanFerentsApp.Session";
-                options.IdleTimeout = TimeSpan.FromSeconds(3600);
-                options.Cookie.IsEssential = true;
-            });
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         // Обов'язковий метод, який встановлює, як буде оброблятися запрос
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MessageSender messageSender)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {

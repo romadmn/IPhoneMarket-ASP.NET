@@ -12,7 +12,7 @@ namespace ASPShop.Data.Models
         public string Address { get; set; } // Адрес покупця
         public string ContactPhone { get; set; } // Контактний телефон покупця
 
-        public int PhoneId { get; set; } // Ссилка на зв'язану можель Phone
-        public Phone Phone { get; set; }
+        public int ProductId { get; set; } // Ссилка на зв'язану можель Phone
+        public Product Product { get; set; }
     }
 }

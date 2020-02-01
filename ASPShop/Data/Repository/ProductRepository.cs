@@ -17,11 +17,11 @@ namespace ASPShop.Data.Repository
             _marketContext = marketContext;
         }
 
-        public IEnumerable<Product> Products => _marketContext.Products.Include(p => p.Category);
-        public IEnumerable<Product> getFavProducts => _marketContext.Products.Where(p => p.IsFavourite);
+        public IEnumerable<Product> Products => _marketContext.Product.Include(p => p.Category);
+        public IEnumerable<Product> getFavProducts => _marketContext.Product.Where(p => p.IsFavourite);
 
         public Product GetObjectProduct(int productId) =>
-            _marketContext.Products.FirstOrDefault(p => p.Id == productId);
+            _marketContext.Product.FirstOrDefault(p => p.Id == productId);
 
     }
 }

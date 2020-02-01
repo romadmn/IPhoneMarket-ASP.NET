@@ -11,8 +11,7 @@ namespace ASPShop.Data.Models
         public string User { get; set; } // Ім'я Фамілія покупця
         public string Address { get; set; } // Адрес покупця
         public string ContactPhone { get; set; } // Контактний телефон покупця
-
-        public int ProductId { get; set; } // Ссилка на зв'язану можель Phone
-        public Product Product { get; set; }
+        public DateTime OrderTime { get; set; }
+        public List<OrderDetail> OrderDetail { get; set; }
     }
 }

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using ASPShop.Data.interfaces;
-using ASPShop.Data.mocks;
-using ASPShop.Data.Models;
+using ASPShop.Data;
+using ASPShop.Data.Repository;
 using ASPShop.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,8 +32,8 @@ namespace ASPShop
         // Метод для реєстрації сервісів
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IAllProducts, MockProducts>(); // Обєднує клас і інтерфейс між собою
-            services.AddTransient<IProductsCategory, MockCategory>(); // Обєднує клас і інтерфейс між собою
+            services.AddTransient<IAllProducts, ProductRepository>(); // Обєднує клас і інтерфейс між собою
+            services.AddTransient<IProductsCategory, CategoryRepository>(); // Обєднує клас і інтерфейс між собою
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<MarketContext>(options => options.UseSqlServer(connection));
             services.AddMvc();
@@ -58,13 +58,6 @@ namespace ASPShop
             }
             app.UseSession(); // Добавлення механізму роботи з сесіями
             app.UseStaticFiles();
-            // обробка помилок HTTP
-            //app.UseStatusCodePagesWithReExecute("/error", "?code={0}");
-
-            //app.Map("/error", ap => ap.Run(async context =>
-            //{
-            //    await context.Response.WriteAsync($"Err: {context.Request.Query["code"]}");
-            //}));
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {

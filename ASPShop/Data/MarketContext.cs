@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ASPShop.Data.Models;
 
-namespace ASPShop.Data.Models
+namespace ASPShop.Data
 {
     public class MarketContext : DbContext
     {
-        public DbSet<Phone> Phones { get; set; }
+        public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
 

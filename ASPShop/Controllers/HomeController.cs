@@ -4,9 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ASPShop.Data.interfaces;
-using ASPShop.Data.Models;
+using ASPShop.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using ASPShop.Data.Models;
 
 namespace ASPShop.Controllers
 {
@@ -19,9 +20,9 @@ namespace ASPShop.Controllers
             db = context;
             _appEnvironment = appEnvironment;
         }
-        public IActionResult Index([FromServices] IAllProducts products)
+        public IActionResult Index()
         {
-            return View(products.Products);
+            return View(db.Products.ToList());
         }
         [HttpGet]
         public IActionResult Buy(int? id)

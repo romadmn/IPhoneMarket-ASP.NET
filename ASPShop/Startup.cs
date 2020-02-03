@@ -35,6 +35,7 @@ namespace ASPShop
         {
             services.AddTransient<IAllProducts, ProductRepository>(); // ќбЇднуЇ клас ≥ ≥нтерфейс м≥ж собою
             services.AddTransient<IProductsCategory, CategoryRepository>(); // ќбЇднуЇ клас ≥ ≥нтерфейс м≥ж собою
+            services.AddTransient<IAllOrders, OrderRepository>(); // ќбЇднуЇ клас ≥ ≥нтерфейс м≥ж собою
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<MarketContext>(options => options.UseSqlServer(connection));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

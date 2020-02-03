@@ -25,7 +25,7 @@ namespace ASPShop.Controllers
         }
         public IActionResult Index()
         {
-            var favproducts = new FavoriteProductsViewModel { favoriteProducts = _allProducts.getFavProducts};
+            var favproducts = new FavoriteProductsViewModel { favoriteProducts = _allProducts.GetFavProducts};
             return View(favproducts);
         }
         [Route("Home/Products")]
@@ -64,20 +64,6 @@ namespace ASPShop.Controllers
                 CurrentCategory = currentCategory
             };
             return View(productObject);
-        }
-        [HttpGet]
-        public IActionResult Buy(int? id)
-        {
-            if (id == null) return RedirectToAction("Index");
-            ViewBag.PhoneId = id;
-            return View();
-        }
-        [HttpPost]
-        public string Buy(Order order)
-        {
-            //db.Order.Add(order);
-            //db.SaveChanges();
-            return "Дякую, " + order.User + ", за замовлення. З вами скоро зв'яжуться!";
         }
         public VirtualFileResult GetCv()
         {

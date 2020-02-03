@@ -18,7 +18,7 @@ namespace ASPShop.Data.Repository
         }
 
         public IEnumerable<Product> Products => _marketContext.Product.Include(p => p.Category);
-        public IEnumerable<Product> getFavProducts => _marketContext.Product.Where(p => p.IsFavourite);
+        public IEnumerable<Product> GetFavProducts => _marketContext.Product.Where(p => p.IsFavourite);
 
         public Product GetObjectProduct(int productId) =>
             _marketContext.Product.FirstOrDefault(p => p.Id == productId);

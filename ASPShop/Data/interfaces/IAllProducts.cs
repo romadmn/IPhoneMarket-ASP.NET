@@ -9,7 +9,7 @@ namespace ASPShop.Data.interfaces
     public interface IAllProducts
     {
         IEnumerable<Product> Products { get; } 
-        IEnumerable<Product> getFavProducts { get; }
+        IEnumerable<Product> GetFavProducts { get; }
         Product GetObjectProduct(int productId);
     }
 }

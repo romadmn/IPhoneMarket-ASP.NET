@@ -1,0 +1,35 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "Оформление замовлення";
+}
+<h2>Форма оформления замовлення</h2>
+
+<form asp-action="Buy" method="post" class="form-horizontal">
+    <p>Для оформления замовлення заповніть наступні поля:</p>
+    <div class="form-group">
+        <label asp-for="User" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="User" class="form-control" />
+            <span asp-validation-for="User" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="ContactPhone" class="col-md-2 control-label"></label>
+        <div class="col-md-5">
+            <input asp-for="ContactPhone" class="form-control" />
+            <span asp-validation-for="ContactPhone" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-outline-danger" value="Відправити" />
+        </div>
+    </div>
+</form>

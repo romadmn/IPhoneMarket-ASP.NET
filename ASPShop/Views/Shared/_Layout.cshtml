@@ -1,57 +1,146 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@ViewData["Title"]</title>
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="~/css/style.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/mdb.min.css" rel="stylesheet">
+    <link href="~/css/style.min.css" rel="stylesheet">
+    <link href="~/css/Style.css" rel="stylesheet">
+
 </head>
 <body>
-    <!--меню-->
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark mt-60">
-        <a class="navbar-brand" href="/">RedApple Store</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Головна</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/Home/Products/">Всі товари</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/Home/Products/" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Вибрати категорію товарів</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item" href="/Home/Products/Phone/">Телефони</a>
-                        <a class="dropdown-item" href="/Home/Products/HeadPhone/">Навушніки</a>
-                        <a class="dropdown-item" href="/Home/Products/Watch/">Годинники</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link btn btn-outline-success" href="/Home/GetCv/">Скачати резюме</a>
-                </li>
-            </ul>
-            <div class="form-inline mt-2 mt-md-0">
-                <a class="nav-link btn btn-danger" href="/ShopCart/">Корзина</a>
+    <!-- Меню -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+        <div class="container">
+
+            <!-- Brand -->
+            <a class="navbar-brand waves-effect" asp-controller="Home" asp-action="Index">
+                <strong class="red-text">RedApple</strong>
+            </a>
+
+            <!-- Collapse -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!-- Ліва частина меню -->
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" asp-controller="Home" asp-action="Index">
+                            Головна
+                            <span class="sr-only"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect" href="/Home/Products/">Всі товари</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle waves-effect" href="/Home/Products/" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Вибрати категорію товарів</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+                            <a class="dropdown-item waves-effect" href="/Home/Products/Phone/">Телефони</a>
+                            <a class="dropdown-item waves-effect" href="/Home/Products/HeadPhone/">Навушніки</a>
+                            <a class="dropdown-item waves-effect" href="/Home/Products/Watch/">Годинники</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-danger waves-effect" href="/Home/GetCv/">Скачати резюме</a>
+                    </li>
+                </ul>
+
+                <!-- Права частина меню -->
+                <ul class="navbar-nav nav-flex-icons">
+                    <li class="nav-item">
+                        <a class="nav-link waves-effect">
+                            <span class="badge red z-depth-1 mr-1"> 1 </span>
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+
+                        <a href="https://linkedin.com/in/romadmn/" class="nav-link waves-effect" target="_blank">
+                            <i class="fab fa-linkedin mr-3"></i>
+                        </a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://github.com/romadmn/" class="nav-link waves-effect" target="_blank">
+                            <i class="fab fa-github mr-3"></i>
+                        </a>
+                    </li>
+                </ul>
+
             </div>
+
         </div>
     </nav>
-    <!--Main content-->
-    <div class="shop container body-content">
-        @RenderBody()
-        <hr />
-    </div>
-    <footer class="footer mt-auto py-3">
-        <div class="container">
-            <span class="text-muted">RedApple - магазин техніки Apple!</span>
+    <!-- Меню -->
+<!--Main content-->
+    <main>
+        <div class="shop container body-content">
+            <section class="text-center mb-4">
+                @RenderBody()
+            </section>
         </div>
+    </main>
+<!--Footer-->
+    <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+        <hr class="my-4">
+
+        <!-- Social icons -->
+        <div class="pb-4">
+            <a href="https://fb.com/romadmn" target="_blank">
+                <i class="fab fa-facebook-f mr-3"></i>
+            </a>
+
+            <a href="https://linkedin.com/in/romadmn/" target="_blank">
+                <i class="fab fa-linkedin mr-3"></i>
+            </a>
+             
+            <a href="https://github.com/romadmn/" target="_blank">
+                <i class="fab fa-github mr-3"></i>
+            </a>
+            <a href="https://t.me/romadmn/" target="_blank">
+                <i class="fab fa-telegram mr-3"></i>
+            </a>
+
+            <a href="http://instagram.com/roma.dmn" target="_blank">
+                <i class="fab fa-instagram mr-3"></i>
+            </a>
+        </div>
+        <!-- Social icons -->
+        <!--Copyright-->
+        <div class="footer-copyright py-3">
+            © 2019 Copyright:
+            <a href="https://romanferents.me/" target="_blank"> Roman Ferents </a>
+        </div>
+        <!--/.Copyright-->
+
     </footer>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="https://bootstrap-4.ru/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="https://bootstrap-4.ru/assets/js/vendor/popper.min.js"></script>
-<script src="https://bootstrap-4.ru/dist/js/bootstrap.min.js"></script>
+    <!--/.Footer-->
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="~/js/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="~/js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="~/js/mdb.min.js"></script>
+    <!-- Initializations -->
+    <script type="text/javascript">
+        // Ініціалізація анімації
+        new WOW().init();
+
+    </script>
 </body>
 </html>

@@ -1,8 +1,12 @@
-﻿html,
+// Your custom styles
+
+/* Required height of parents of the Half Page Carousel for proper displaying carousel itself */
+html,
 body,
 .view {
   height: 100%; }
 
+/* Half Page Carousel itself*/
 .carousel {
   height: 50%; }
   .carousel .carousel-inner {
@@ -11,25 +15,11 @@ body,
     .carousel .carousel-inner .active {
       height: 100%; }
 
+/* Adjustment for mobile devices*/
 @media (max-width: 776px) {
   .carousel {
     height: 100%; } }
 
+/* Footer color for sake of consistency with Navbar */
 .page-footer {
-    background-color: #e63232e8;
-}
-
-.shop {
-    margin-top: 100px;
-}
-.boximg {
-    width: 300px;
-    height: 300px;
-}
-img {
-    width: 100%;
-    height: 100%;
-}
-.mdb-color.lighten-3 {
-    background-color: #f700009e !important;
-}
+  background-color: #929FBA; }

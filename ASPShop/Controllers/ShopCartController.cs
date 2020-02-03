@@ -25,7 +25,14 @@ namespace ASPShop.Controllers
         {
             var items = _shopCart.GetShopItems();
             _shopCart.ListShopItems = items;
-            var obj = new ShopCartViewModel {_shopCart = _shopCart};
+            var obj = new ShopCartViewModel {ShopCart = _shopCart};
+            int ShopCartItemsPriceSum = 0;
+            foreach (var el in _shopCart.ListShopItems)
+            {
+                ShopCartItemsPriceSum += el.Product.Price;
+            }
+
+            ViewBag.PriceSum = ShopCartItemsPriceSum;
             return View(obj);
         }
 

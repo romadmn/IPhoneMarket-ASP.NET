@@ -1,35 +1,77 @@
 ﻿@model Order
+
 @{
     ViewData["Title"] = "Оформление замовлення";
 }
-<h2>Форма оформления замовлення</h2>
+<div class="container wow fadeIn">
 
-<form asp-action="Buy" method="post" class="form-horizontal">
-    <p>Для оформления замовлення заповніть наступні поля:</p>
-    <div class="form-group">
-        <label asp-for="User" class="col-md-2 control-label"></label>
-        <div class="col-md-5">
-            <input asp-for="User" class="form-control" />
-            <span asp-validation-for="User" class="text-danger"></span>
+        <h2 class="my-5 h2 text-center">Форма оформления замовлення</h2>
+    <div class="row">
+    <div class="col-md-8 mb-4">
+        <div class="card">
+            <form asp-action="Buy" class="card-body">
+                <div class="md-form mb-5">
+                    <input asp-for="User" class="form-control" placeholder="Роман Ференц">
+                    <label asp-for="User"></label>
+                </div>
+
+                <div class="md-form mb-5">
+                    <input asp-for="Address" class="form-control" placeholder="1234 Main St">
+                    <label asp-for="Address" class=""></label>
+                </div>
+                <div class="md-form mb-5">
+                    <input asp-for="ContactPhone" class="form-control" placeholder="073 777 28 73">
+                    <label asp-for="ContactPhone" class=""></label>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="CardName"></label>
+                        <input asp-for="CardName" class="form-control">
+                        <small class="text-muted">Повне І'мя написане на карті</small>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="CardNumber"></label>
+                        <input asp-for="CardNumber" class="form-control">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label asp-for="CardDate"></label>
+                        <input asp-for="CardDate" class="form-control">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label asp-for="CardCvv"></label>
+                        <input asp-for="CardCvv" class="form-control">
+                    </div>
+                </div>
+                <hr class="mb-4">
+                <button class="btn btn-outline-danger btn-lg btn-block" type="submit">Відправити</button>
+            </form>
         </div>
+
     </div>
-    <div class="form-group">
-        <label asp-for="Address" class="col-md-2 control-label"></label>
-        <div class="col-md-5">
-            <input asp-for="Address" class="form-control" />
-            <span asp-validation-for="Address" class="text-danger"></span>
-        </div>
+
+            <div class="col-md-4 mb-4">
+
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Ваша корзина</span>
+                    <span class="badge badge-secondary badge-pill">@ViewBag.ShopCount</span>
+                </h4>
+                <ul class="list-group mb-3 z-depth-1">
+                    @foreach (var el in @ViewBag.ShopList)
+                    {
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">@el.Product.Name</h6>
+                            </div>
+                            <span class="text-muted">@el.Product.Price</span>
+                        </li>
+                    }
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Загальна сума (UAH)</span>
+                        <strong>@ViewBag.PriceSum</strong>
+                    </li>
+                </ul>
+            </div>
     </div>
-    <div class="form-group">
-        <label asp-for="ContactPhone" class="col-md-2 control-label"></label>
-        <div class="col-md-5">
-            <input asp-for="ContactPhone" class="form-control" />
-            <span asp-validation-for="ContactPhone" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-outline-danger" value="Відправити" />
-        </div>
-    </div>
-</form>
+</div>

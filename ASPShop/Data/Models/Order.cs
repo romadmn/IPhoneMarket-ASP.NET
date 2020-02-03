@@ -13,19 +13,30 @@ namespace ASPShop.Data.Models
         
         [Display(Name="Ім'я та прізвище:")]
         [StringLength(25)]
-        [Required(ErrorMessage = "Довжина не менше 5 символів")]
-        public string User { get; set; } // Ім'я Фамілія покупця
+        public string User { get; set; }
        
         [Display(Name = "Адреса:")]
         [StringLength(25)]
-        [Required(ErrorMessage = "Довжина не менше 15 символів")]
-        public string Address { get; set; } // Адрес покупця
+        public string Address { get; set; } 
         
+        [Display(Name = "Ім'я власника карти:")]
+        [StringLength(20)]
+        public string CardName { get; set; } 
+        [Display(Name = "Номер карти:")]
+        [StringLength(20)]
+        [DataType(DataType.CreditCard)]
+        public string CardNumber { get; set; } 
+        [Display(Name = "Дата карти:")]
+        [StringLength(20)]
+        public string CardDate { get; set; } 
+        [Display(Name = "CVV код:")]
+        [StringLength(3)]
+        [Required(ErrorMessage = "Довжина 3 симоли!")]
+        public string CardCvv { get; set; } 
         [Display(Name = "Номер телефону:")]
         [StringLength(20)]
         [DataType(DataType.PhoneNumber)]
-        [Required(ErrorMessage = "Довжина не менше 10 символів")]
-        public string ContactPhone { get; set; } // Контактний телефон покупця
+        public string ContactPhone { get; set; } 
         [BindNever]
         [ScaffoldColumn(false)]
         public DateTime OrderTime { get; set; }

@@ -33,7 +33,10 @@ namespace ASPShop.Controllers
         public IActionResult Products(string category)
         {
             IEnumerable<Product> products = null;
-            string currentCategory = "Всі товари";
+            var currentCategory = new Category
+            {
+                CategoryName = "Всі товари"
+            };
             if (string.IsNullOrEmpty(category))
             {
                 products = _allProducts.Products.OrderBy(i=>i.Id);
@@ -43,17 +46,17 @@ namespace ASPShop.Controllers
                 if (string.Equals("phone", category, StringComparison.OrdinalIgnoreCase))
                 {
                     products = _allProducts.Products.Where(i => i.Category.CategoryName.Equals("Телефони")).OrderBy(i=>i.Id);
-                    currentCategory = "Телефони";
+                    currentCategory.CategoryName = "Телефони";
                 }
                 else if (string.Equals("headphone", category, StringComparison.OrdinalIgnoreCase))
                 {
                     products = _allProducts.Products.Where(i => i.Category.CategoryName.Equals("Навушніки")).OrderBy(i => i.Id);
-                    currentCategory = "Навушніки";
+                    currentCategory.CategoryName = "Навушніки";
                 }
                 else if(string.Equals("watch", category, StringComparison.OrdinalIgnoreCase))
                 {
                     products = _allProducts.Products.Where(i => i.Category.CategoryName.Equals("Годинники")).OrderBy(i => i.Id);
-                    currentCategory = "Годинники";
+                    currentCategory.CategoryName = "Годинники";
                 }
 
             }
@@ -61,7 +64,7 @@ namespace ASPShop.Controllers
             var productObject = new ProductsListViewModel
             {
                 AllProducts = products,
-                CurrentCategory = currentCategory
+                CurrentCategory = currentCategory.CategoryName
             };
             return View(productObject);
         }

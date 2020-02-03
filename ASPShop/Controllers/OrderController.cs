@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ASPShop.Data.interfaces;
 using ASPShop.Data.Models;
+using ASPShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ASPShop.Controllers
@@ -21,6 +22,18 @@ namespace ASPShop.Controllers
 
         public IActionResult Buy()
         {
+            var items = _shopCart.GetShopItems();
+            _shopCart.ListShopItems = items;
+            int ShopCartItemsPriceSum = 0;
+            int ShopCartItemsCount = 0;
+            foreach (var el in _shopCart.ListShopItems)
+            {
+                ShopCartItemsPriceSum += el.Product.Price;
+                ShopCartItemsCount++;
+            }
+            ViewBag.PriceSum = ShopCartItemsPriceSum;
+            ViewBag.ShopCount = ShopCartItemsCount;
+            ViewBag.ShopList = _shopCart.ListShopItems;
             return View();
         }
         [HttpPost]

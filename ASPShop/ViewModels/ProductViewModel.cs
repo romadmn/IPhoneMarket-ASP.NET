@@ -9,5 +9,6 @@ namespace ASPShop.ViewModels
     public class ProductViewModel
     {
         public Product Product { get; set; }
+        public string CurrentCategory { get; set; }
     }
 }

@@ -1,17 +1,18 @@
 ﻿@model ShopCartViewModel
 <div class="container">
-    <h1>Кількість товарів: @Model._shopCart.ListShopItems.Count()</h1>
-    @foreach (var el in Model._shopCart.ListShopItems)
-    {
-        <div class="alert alert-primary mt-3">
-            <b>Товар: </b> @el.Product.Name <br/>
-            <b>Ціна: </b> @el.Product.Price.ToString("c")
-        <b><a asp-controller="ShopCart" asp-action="RemoveFromCart" asp-route-Id="@el.Id">Видалити</a></b>
-        </div>
-    }
-    <hr/>
-    @if (Model._shopCart.ListShopItems.Count() != 0)
-    {
-        <a class="btn btn-danger" asp-controller="Order" asp-action="Buy">Оплатити</a>
-    }
-</div>
+        <h1>Кількість товарів: @Model.ShopCart.ListShopItems.Count()</h1>
+        @foreach (var el in Model.ShopCart.ListShopItems)
+        {
+            <div class="alert alert-primary mt-3">
+                <b>Товар: </b> @el.Product.Name <br />
+                <b>Ціна: </b> @el.Product.Price.ToString("c")
+                <b><a asp-controller="ShopCart" asp-action="RemoveFromCart" asp-route-Id="@el.Id">Видалити</a></b>
+            </div>
+        }
+        <hr />
+        <h1>Загальна сума товарів: @ViewBag.PriceSum.ToString("c")</h1>
+        @if (Model.ShopCart.ListShopItems.Count() != 0)
+        {
+            <a class="btn btn-danger" asp-controller="Order" asp-action="Buy">Оплатити</a>
+        }
+    </div>

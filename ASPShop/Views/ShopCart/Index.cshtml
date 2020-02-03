@@ -1,12 +1,17 @@
 ﻿@model ShopCartViewModel
 <div class="container">
-    @foreach(var el in Model._shopCart.ListShopItems)
+    <h1>Кількість товарів: @Model._shopCart.ListShopItems.Count()</h1>
+    @foreach (var el in Model._shopCart.ListShopItems)
     {
-        <div class="alert alert-warning mt-3">
-            <b>Продукти: </b> @el.Product.Name <br/>
+        <div class="alert alert-primary mt-3">
+            <b>Товар: </b> @el.Product.Name <br/>
             <b>Ціна: </b> @el.Product.Price.ToString("c")
+        <b><a asp-controller="ShopCart" asp-action="RemoveFromCart" asp-route-Id="@el.Id">Видалити</a></b>
         </div>
     }
     <hr/>
-    <a class="btn btn-danger" asp-controller="Order" asp-action="Buy">Оплатити</a>
+    @if (Model._shopCart.ListShopItems.Count() != 0)
+    {
+        <a class="btn btn-danger" asp-controller="Order" asp-action="Buy">Оплатити</a>
+    }
 </div>

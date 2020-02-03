@@ -16,7 +16,7 @@ body,
     height: 100%; } }
 
 .page-footer {
-    background-color: #e63232e8;
+    background-color: rgba(208, 50, 3, 0.85);
 }
 
 .shop {
@@ -31,5 +31,5 @@ img {
     height: 100%;
 }
 .mdb-color.lighten-3 {
-    background-color: #f700009e !important;
+    background-color: rgba(208, 50, 3, 0.85) !important;
 }

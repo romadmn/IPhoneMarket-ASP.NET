@@ -1,0 +1,39 @@
+﻿@model ProductViewModel
+
+<div class="container dark-grey-text mt-5">
+
+    <div class="row wow fadeIn">
+
+        <div class="col-md-6 mb-4">
+
+            <img src="~/@Model.Product.Img" class="img-fluid" alt="">
+        </div>
+        <div class="col-md-6 mb-4">
+
+            <div class="p-4">
+
+                <div class="mb-3">
+                    <a href="/Home/Product/Товар">
+                        <span class="badge purple mr-1">Товар</span>
+                    </a>
+                </div>
+
+                <p class="lead">
+                    <span>@Model.Product.Price.ToString("c")</span>
+                </p>
+
+                <p class="lead font-weight-bold">Опис товару</p>
+
+                <p>@Model.Product.LongDesk</p>
+
+                <form class="d-flex justify-content-left">
+                    <input type="number" value="1" name="Count" id="Count" aria-label="Search" class="form-control" style="width: 100px">
+                    <button class="btn btn-primary btn-md my-0 p" type="submit" asp-controller="ShopCart" asp-action="AddToCart" asp-route-Id="@Model.Product.Id" asp-route-Count="Count">
+                        Добавити в корзину
+                        <i class="fas fa-shopping-cart ml-1"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

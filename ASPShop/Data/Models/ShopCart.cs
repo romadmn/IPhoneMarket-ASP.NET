@@ -34,6 +34,12 @@ namespace ASPShop.Data.Models
                 {ShopCartId = ShopCartId, Product = product, Price = product.Price});
             _marketContext.SaveChanges();
         }
+        public void RemoveFromCart(int Id)
+        {
+            var item = _marketContext.ShopCartItem.FirstOrDefault(i=>i.Id == Id);
+            _marketContext.ShopCartItem.Remove(item);
+            _marketContext.SaveChanges();
+        }
 
         public List<ShopCartItem> GetShopItems()
         {

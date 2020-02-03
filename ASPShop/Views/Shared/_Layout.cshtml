@@ -58,10 +58,9 @@
                 <!-- Права частина меню -->
                 <ul class="navbar-nav nav-flex-icons">
                     <li class="nav-item">
-                        <a class="nav-link waves-effect">
-                            <span class="badge red z-depth-1 mr-1"> 1 </span>
+                        <a class="nav-link waves-effect" asp-controller="ShopCart" asp-action="Index">
                             <i class="fas fa-shopping-cart"></i>
-                            <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+                            <span class="clearfix d-none d-sm-inline-block"> Корзина </span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -83,7 +82,7 @@
         </div>
     </nav>
     <!-- Меню -->
-<!--Main content-->
+    <!--Main content-->
     <main>
         <div class="shop container body-content">
             <section class="text-center mb-4">
@@ -91,13 +90,10 @@
             </section>
         </div>
     </main>
-<!--Footer-->
-    <footer class="page-footer text-center font-small mt-4 wow fadeIn">
-
-        <hr class="my-4">
-
+    <!--Footer-->
+    <footer class="page-footer fixed-bottom text-center font-small mt-4 wow fadeIn">
         <!-- Social icons -->
-        <div class="pb-4">
+        <div class="pb-4 mt-3">
             <a href="https://fb.com/romadmn" target="_blank">
                 <i class="fab fa-facebook-f mr-3"></i>
             </a>
@@ -105,7 +101,7 @@
             <a href="https://linkedin.com/in/romadmn/" target="_blank">
                 <i class="fab fa-linkedin mr-3"></i>
             </a>
-             
+
             <a href="https://github.com/romadmn/" target="_blank">
                 <i class="fab fa-github mr-3"></i>
             </a>

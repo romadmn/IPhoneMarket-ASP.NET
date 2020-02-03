@@ -29,13 +29,22 @@ namespace ASPShop.Controllers
             return View(obj);
         }
 
-        public RedirectToActionResult AddToCart(int id)
+        public RedirectToActionResult AddToCart(int id, int Count = 1)
         {
             var item = _productRepository.Products.FirstOrDefault(i=> i.Id == id);
             if (item != null)
             {
-                _shopCart.AddToCart(item);
+                for (int i = 1; i <= Count; i++)
+                {
+                    _shopCart.AddToCart(item);
+                }
             }
+
+            return RedirectToAction("Index");
+        }
+        public RedirectToActionResult RemoveFromCart(int Id)
+        {
+            _shopCart.RemoveFromCart(Id);
 
             return RedirectToAction("Index");
         }
